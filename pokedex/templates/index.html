@@ -3,7 +3,9 @@
 {% block content %}
   <p class="p-2">Hola, este es tu primer sitio en Django</p>
     <h3>Pokemons</h3>
-    <a href="{% url "pokedex:add_pokemon" %}">Añadir pokemon</a>
+    {% if user.is_authenticated %}
+      <a href="{% url "pokedex:add_pokemon" %}">Añadir pokemon</a>
+    {% endif %}
   <div class="row">
     {% for pokemon in pokemons %}
       <div class="col-xs-12 col-md-6 col-lg-4">
@@ -13,8 +15,10 @@
             <h5 class="card-title">{{ pokemon.name }}</h5>
             <p class="card-text">Altura {{pokemon.height}} </p>
             <a href="{{ pokemon.pk }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-            <a href="edit_pokemon/{{ pokemon.pk }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
-            <a href="delete_pokemon/{{ pokemon.pk }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+            {% if user.is_authenticated %}
+              <a href="edit_pokemon/{{ pokemon.pk }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+              <a href="delete_pokemon/{{ pokemon.pk }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
           </div>
         </div>
       </div>
