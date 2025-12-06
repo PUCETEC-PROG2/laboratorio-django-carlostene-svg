@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}  {{ trainer|capfirst }} {% endblock %}
+{% block title %}
+  {{ trainer|capfirst }}
+{% endblock %}
 {% block content %}
-  <h3>{{ trainer|capfirst }}</h3>
+  <p>
+    Has elegido el entrenador: <strong>{{ trainer|capfirst }}</strong>
+  </p>
+
   <h3>Detalles del entrenador</h3>
   <ul>
     <li>Nivel: {{ trainer.level }}</li>
     <li>Fecha de nacimiento: {{ trainer.birth_date }}</li>
   </ul>
+  <img src="{{ trainer.picture.url }}" class="card-img-top img-fluid w-50" alt="{{ trainer.first_name }}" />
+  <a href="{% url 'pokedex:trainers' %}" class="btn btn-secondary">Regresar</a>
 {% endblock %}
